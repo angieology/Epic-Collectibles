@@ -11,10 +11,9 @@ contract GradientToken is ERC721, Ownable {
         string outer;
         string inner;
     }
-    // list of all gradients in existence, each has a field pointing to its owner from Ownable
     Gradient[] gradients;
     
-    function mint(string memory _outer, string memory _inner) public payable onlyOwner{
+    function mint(string memory _outer, string memory _inner) public payable {
         require(msg.value >= 5);
 
         Gradient memory _gradient = Gradient({ outer: _outer, inner: _inner });

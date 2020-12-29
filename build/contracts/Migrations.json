@@ -882,12 +882,12 @@
     "1337": {
       "events": {},
       "links": {},
-      "address": "0xb87ebbF0b9ebDE18c308Dd314BbCbfaB3EFfa076",
-      "transactionHash": "0xc99b314c021ccbae336ab3dccf8fd48efe37f4878094851cbd82a773631956a8"
+      "address": "0x612b1760C64c6414e9A9901Af883041571e6Befd",
+      "transactionHash": "0xd826c9fa1dd0025ec122458a90efea3b123be40e0eb3beb790060012ca883d2a"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-28T00:13:53.104Z",
+  "updatedAt": "2020-12-29T23:46:45.305Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

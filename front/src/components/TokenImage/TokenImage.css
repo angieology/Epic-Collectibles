@@ -1,0 +1,21 @@
+.image_wrapper {
+
+  
+    position:relative;
+  }
+  
+  
+  
+  
+  img.outline {
+    position:absolute;
+  
+    z-index: 2;
+  }
+  
+  img > svg {
+    position:absolute;
+  
+    z-index: 1;
+  }
+  

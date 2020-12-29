@@ -57,7 +57,6 @@ contract("Auction", (accounts) => {
       });
 
       tokenId = await nft.tokenByIndex(0);
-
       await nft.approve(auctionContract.address, tokenId);
       await auctionContract.createAuction(tokenId, 2);
     });

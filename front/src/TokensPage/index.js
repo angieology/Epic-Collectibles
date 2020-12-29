@@ -31,9 +31,10 @@ const TokensPage = () => {
       randomColor1,
       randomColor2
     ]
-     await mintToken(gradient);
-     const res = await fetchTokens();
-    dispatch({type: 'SET_TOKENS', payload: res})
+    await mintToken(gradient);
+    // update states;
+     const payload = await fetchTokens();
+    dispatch({type: 'MINT_UPDATE', payload })
   }
   return (
     <div className="TokensPage">

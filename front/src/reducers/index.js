@@ -1,15 +1,19 @@
-
-const Reducer=(state, action)=> {
-    switch(action.type){
-        case 'UPDATE_STORE':
-            const { fetchTokens, isLoading, mintToken, owner, tokens } = action.payload
-            return { ...state, fetchTokens, isLoading, mintToken, owner, tokens};  
-        case 'SET_TOKENS':
-            return { ...state,
-                tokens: action.payload
-            }
-        default : return state
-    }
-}
+const Reducer = (state, action) => {
+  switch (action.type) {
+    case "UPDATE_STORE":
+      return {
+        ...state,
+        ...action.gradientTokenStore,
+        ...action.auctionStore,
+      };
+    case "MINT_UPDATE":
+      const { tokens, isLoading, ownerTokens } = action.payload;
+      return { ...state, tokens, isLoading, ownerTokens };
+    case "SET_TOKENS_ON_SALE":
+      return { ...state, tokensOnSale: action.payload};
+    default:
+      return state;
+  }
+};
 
 export default Reducer;

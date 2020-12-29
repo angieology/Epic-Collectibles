@@ -30,18 +30,23 @@ contract("Gradient token", (accounts) => {
       expect(gradients).to.include({ inner: "#ddddff" });
     });
 
-    it("allows to mint only to owner", async () => {
+    it("allows to mint to anyone", async () => {
       let instance = await GradientToken.deployed();
+      let originalOwner = await instance.owner();
       let other = accounts[1];
 
       await instance.transferOwnership(other);
-      await expectRevert(
-        instance.mint("#ff00dd", "#ddddff", {
-          from: accounts[0],
-          value: Web3.utils.toWei("5", "ether"),
-        }),
-        "Ownable: caller is not the owner"
-      );
+
+      await instance.mint("#ff00dd", "#ddddff", {
+        from: accounts[0],
+        value: Web3.utils.toWei("5", "ether"),
+      });
+
+      let tokenID = await instance.tokenOfOwnerByIndex( originalOwner, 0);
+      let gradients = await instance.getGradient(tokenID);
+      // TODO figure out why gradients returns extra fields
+      expect(gradients).to.include({ outer: "#ff00dd" });
+      expect(gradients).to.include({ inner: "#ddddff" });
     });
   });
 });

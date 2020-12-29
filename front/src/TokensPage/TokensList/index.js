@@ -6,13 +6,15 @@ import TokenItem from "./TokenItem";
 import "./TokensList.css";
 
 const TokensList = () => {
-  const [state, dispatch] = useContext(ContractContext);
+  const [state] = useContext(ContractContext);
 
 const [tokens, setTokens] = useState([])
+// const [ownerTokens, setOwnerTokens] = useState([])
 
   useEffect(()=> {
     if (state) { 
       setTokens(state.tokens)
+      // setOwnerTokens(state.ownerTokens)
     }
   },[state])
 
@@ -25,10 +27,10 @@ const [tokens, setTokens] = useState([])
           {tokens.map(token => (
             <TokenItem
               key={token.index}
-              token={token.gradient}
-              // onClick={() => showModal(<TokenView token={token.gradient} />)}
+              token={token}
+              // isOwned={ownerTokens.includes(token.index)}
             />
-          ))}
+        ))}
         </div>
       ) : (
         <div className="TokensList-label_empty">You don't have tokens yet.</div>
