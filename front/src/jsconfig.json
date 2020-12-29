@@ -1,0 +1,7 @@
+{
+    "compilerOptions": {
+      "baseUrl": "src"
+    },
+    "include": ["src"]
+  }
+  // TODO fix absolute paths not working
