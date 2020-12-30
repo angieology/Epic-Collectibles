@@ -13,7 +13,7 @@ import "./TokenItem.css";
 
 const TokenItem = ({ token }) => {
   const { attributes, index: tokenID } = token;
-  const [isOwned, isOnSale] = useTokenStatus(tokenID);
+  const [isOwned, isOnSale, price] = useTokenStatus(tokenID);
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
@@ -28,9 +28,15 @@ const TokenItem = ({ token }) => {
         <TokenView token={token} onCloseClicked={closeModal} />{" "}
       </Modal>
       <div className="TokenItem" onClick={openModal}>
-        <div className={`TokenItem-background_style ${attributes && attributes.element}`} onClick={openModal}>
-
-          {attributes && <TokenImage outer={attributes.outer} inner={attributes.inner} />}
+        <div
+          className={`TokenItem-background_style ${
+            attributes && attributes.element.toLowerCase()
+          }`}
+          onClick={openModal}
+        >
+          {attributes && (
+            <TokenImage outer={attributes.outer} inner={attributes.inner} />
+          )}
 
           <div className="TokenItem-details">
             <span className="TokenItem-details_icons">
@@ -38,9 +44,7 @@ const TokenItem = ({ token }) => {
               {isOwned && <PetsIcon />}
             </span>
             <span className="TokenItem-details_info">
-              <div className="TokenItem-label bold-highlight">
-               #{tokenID}
-              </div>
+              <div className="TokenItem-label bean">#{tokenID}</div>
 
               <a onClick={openModal}>Overview</a>
             </span>

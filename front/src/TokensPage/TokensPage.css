@@ -1,8 +1,22 @@
 .TokensPage {
   margin-top: 50px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .TokensPage-tokens {
   max-width: 1400px;
   margin: 50px auto;
+}
+
+
+.TokensPage button {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  height: 45px;
 }

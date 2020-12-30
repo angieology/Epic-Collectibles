@@ -11,6 +11,8 @@ const useTokenStatus = (tokenID) => {
   const [isOwned, setIsOwned] = useState(false);
   const [isOnSale, setIsOnSale] = useState(false);
 
+  const [price, setPrice] = useState(null);
+
   useEffect(() => {
     if (state) {
       setTokensOnSale(state.tokensOnSale);
@@ -34,7 +36,13 @@ const useTokenStatus = (tokenID) => {
     const newSale = tokensOnSale && tokensOnSale.includes(tokenID);
     setIsOnSale(newSale);
   });
-  return [isOwned, isOnSale];
+
+  useEffect(() =>{
+    if (tokenToAuction && tokenToAuction[tokenID])
+    setPrice(tokenToAuction[tokenID].price)
+  }, [tokenToAuction]);
+
+  return [isOwned, isOnSale, price];
 };
 
 export default useTokenStatus;

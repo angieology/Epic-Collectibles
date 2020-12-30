@@ -1,15 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const IMAGE_HEIGHT = 200;
-const IMAGE_WIDTH = 250;
 
-const BackgroundSVG = ({outer, inner}) => {
+const BackgroundSVG = ({outer, inner, height, width}) => {
+  // width = height * 1.25
   const gradId = `${outer}${inner}`.replace(/#/g, "");
   return (
     <svg
-      width={IMAGE_WIDTH}
-      height={IMAGE_HEIGHT}
+      width={width}
+      height={height}
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -22,8 +21,8 @@ const BackgroundSVG = ({outer, inner}) => {
       <rect 
       x="0" 
       y="0" 
-      width={IMAGE_WIDTH}
-      height={IMAGE_HEIGHT}        
+      width={width}
+      height={height}        
       fill={`url(#${gradId})`}
 />
     </svg>

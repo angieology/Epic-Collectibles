@@ -5,11 +5,10 @@ import outlineImage from "./epic-outline.png";
 
 import './TokenImage.css';
 
-const TokenImage = ({outer, inner, size}) => (
-    
+const TokenImage = ({outer, inner, height=200, width=250}) => (
     <div className="image_wrapper">
-    <img height="200px" className="outline" alt="" src={outlineImage}/>
-    <BackgroundSVG outer={outer} inner={inner}/>
+    <img height={height} width={width} className="outline" alt="" src={outlineImage}/>
+    <BackgroundSVG  outer={outer} inner={inner} height={height} width={width}/>
   </div>
 )
 
@@ -18,7 +17,8 @@ const TokenImage = ({outer, inner, size}) => (
 TokenImage.propTypes = {
   outer: PropTypes.string.isRequired,
   inner: PropTypes.string.isRequired,
-  size: PropTypes.number
+  height: PropTypes.number,
+  width: PropTypes.number
 };
 
 export default TokenImage

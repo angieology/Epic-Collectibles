@@ -6,6 +6,7 @@ import LoyaltyIcon from "@material-ui/icons/Loyalty";
 import TokenImage from "../../../components/TokenImage";
 import ContractContext from "../../../Store";
 import useTokenStatus from "../../../utils/useTokenStatus";
+import epcoinSym from "../../../images/epcoin.png";
 
 import "./TokenView.css";
 
@@ -14,9 +15,10 @@ const TokenView = ({ token, onCloseClicked }) => {
   const [state, dispatch] = useContext(ContractContext);
 
   const [askPrice, setAskPrice] = useState(5);
-  const [bidPrice, setBidPrice] = useState(5);
 
-  const [isOwned, isOnSale] = useTokenStatus(tokenID);
+  const [isOwned, isOnSale, price] = useTokenStatus(tokenID);
+
+  const [bidPrice, setBidPrice] = useState(price);
 
   const { element, name } = attributes;
   const stats = JSON.parse(attributes.stats);
@@ -54,19 +56,19 @@ const TokenView = ({ token, onCloseClicked }) => {
   };
 
   return (
-    <div className={`TokenView-layout card ${element}`}>
+    <div className={`TokenView-layout card ${element.toLowerCase()}`}>
       <div className="circles" />
       <div className="TokenView-above-circle">
         <button className="close" onClick={onCloseClicked} />
         <div className={`TokenView-content_wrapper `}>
           <div>
             {attributes && (
-              <TokenImage outer={attributes.outer} inner={attributes.inner} />
+              <TokenImage outer={attributes.outer} inner={attributes.inner}/>
             )}
 
-            <div className="TokenView-label bold-highlight">#{tokenID}</div>
+            <div className="TokenView-label bean">#{tokenID}</div>
             <div className="TokenView-label">Name: {name}</div>
-            <div className="TokenView-label">Element: {element}</div>
+            <div className="TokenView-label">Type: {element}</div>
 
             {Object.entries(stats).map(([key, value]) => (
               <div className="TokenView-label" key={key}>
@@ -83,7 +85,7 @@ const TokenView = ({ token, onCloseClicked }) => {
                     <span className="stat-key">{key}</span>{" "}
                     <span className="stat-value">{value}</span>
                   </div>
-                  <div className={`stat-bar ${element}`}>
+                  <div className={`stat-bar ${element.toLowerCase()}`}>
                     <div
                       className="stat-bar_filler"
                       style={{ width: `${(value / 1000) * 100}%` }}
@@ -104,7 +106,11 @@ const TokenView = ({ token, onCloseClicked }) => {
             )}
             {isOnSale && (
               <p className="text-with-icon">
-                <LoyaltyIcon /> Currently on sale
+                <LoyaltyIcon /> Currently on sale for{" "}
+                <span className="price">
+                  <img src={epcoinSym} alt="" />
+                  {price}{" "}
+                </span>
               </p>
             )}
           </div>

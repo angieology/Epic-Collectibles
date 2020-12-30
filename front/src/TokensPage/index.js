@@ -1,15 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import generateName from "sillyname";
-import Button from "../components/Button";
 import WithLoader from "../components/WithLoader";
 import TokensList from "./TokensList";
 import ContractContext from "../Store";
+
 import "./TokensPage.css";
 
-const ELEMENTS = ["fire", "water", "electricity", "air", "earth"];
-const generateStat = (num = 10, multiplier = 100, min = 1) =>
-  Math.floor(Math.random() * num + min) * multiplier;
-
+const ELEMENTS = ["Fire", "Water", "Electricity", "Air", "Earth"];
 /**
  *
  * @param {int} max , inclusive
@@ -39,14 +36,14 @@ const TokensPage = () => {
 
   const handleMint = async () => {
     const stats = {
-      weight: getRandomInt(100, 1, 10),
-      height: getRandomInt(100, 1, 10),
+      Weight: getRandomInt(100, 1, 10) + "lb",
+      Height: getRandomInt(100, 1, 10) + "cm",
     };
     const abilities = {
-      power: getRandomInt(100, 1, 10),
-      defense: getRandomInt(100, 1, 10),
-      attack: getRandomInt(100, 1, 10),
-      healing: getRandomInt(100, 1, 10),
+      Power: getRandomInt(100, 1, 10),
+      Defense: getRandomInt(100, 1, 10),
+      Attack: getRandomInt(100, 1, 10),
+      Healing: getRandomInt(100, 1, 10),
     };
 
     const name = generateName();
@@ -70,7 +67,12 @@ const TokensPage = () => {
   return (
     <div className="TokensPage">
       <h1>Epic Pets</h1>
-      <Button onClick={handleMint} label="Breed Epic: cost 5 EPCOIN" />
+      <button
+        className="button button--winona button--border-thin button--round-s"
+        onClick={handleMint}
+      >
+        Breed Epic
+      </button>
       <div className="TokensPage-tokens">
         <WithLoader isLoading={isLoading}>
           <TokensList />
