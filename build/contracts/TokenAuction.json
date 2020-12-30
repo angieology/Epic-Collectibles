@@ -4512,12 +4512,12 @@
     "1337": {
       "events": {},
       "links": {},
-      "address": "0x424d9E2030a983859e4235551B72917B0FC5A22e",
-      "transactionHash": "0xa32b9ac559bb651bc762e416d173dde8aa66ec6dabcc65e77fbad07255622e29"
+      "address": "0x020285bF346b38EB81d550d5aE79D9Cf68A8e630",
+      "transactionHash": "0xb85f61dc12233ee5081375734a4e7831359a76724e4f2527636ca934d76f3558"
     }
   },
   "schemaVersion": "3.3.2",
-  "updatedAt": "2020-12-29T23:46:45.302Z",
+  "updatedAt": "2020-12-29T23:56:25.603Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

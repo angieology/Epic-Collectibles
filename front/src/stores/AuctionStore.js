@@ -1,3 +1,4 @@
+import getAccounts from '../utils/getAccounts';
 
 var Web3 = require("web3");
 
@@ -28,6 +29,7 @@ export default class AuctionStore {
 
  fetchActiveAuctions = async () => {
   // roundabout way to fetch all tokens on sale, since we cannot retrieve the entire mapping at once
+  // const accounts = await getAccounts();
 
     const supply = await this.contractsStore.gradientTokenInstance.totalSupply();
 
@@ -62,13 +64,12 @@ export default class AuctionStore {
 
 
    try {
-     const accounts = getAccounts();
-
+     const accounts = await getAccounts();
       const priceInWei = Web3.utils.toWei(askPrice.toString(), "ether")
-      const tokenIndex = await this.contractsStore.gradientTokenInstance.tokenByIndex(tokenID);
+      const tokenIndex = await this.contractsStore.gradientTokenInstance.tokenByIndex(tokenID, {from: accounts[0]});
       await this.contractsStore.gradientTokenInstance.approve(this.auctionInstance.address, tokenIndex, { from: accounts[0] });
       
-      await this.auctionInstance.createAuction(tokenID, priceInWei, { from: accounts[0] });
+      await this.auctionInstance.createAuction(tokenID, priceInWei, {from: accounts[0]});
       const updatedTokensOnSale = await this.fetchActiveAuctions(accounts[0]); // do i need to get per owner, or just all
       return updatedTokensOnSale;
    } catch (e) {

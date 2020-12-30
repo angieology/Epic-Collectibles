@@ -29,8 +29,8 @@ const TokenView = ({ token, onCloseClicked }) => {
   }, [state]);
 
 
-  const isOnSale = tokensOnSale.includes(tokenID);
-  const isOwned = ownerTokens.includes(tokenID);
+  const isOnSale = tokensOnSale && tokensOnSale.includes(tokenID);
+  const isOwned = ownerTokens && ownerTokens.includes(tokenID);
 
   const handleSellSubmit = async () => {
     const newAuctionRes = await state.createAuction(tokenID, askPrice, state.owner);
