@@ -6,7 +6,7 @@ const Reducer = (state, action) => {
         ...action.gradientTokenStore,
         ...action.auctionStore,
       };
-    case "MINT_UPDATE":
+    case "UPDATE_TOKENS":
       const { tokens, isLoading, ownerTokens } = action.payload;
       return { ...state, tokens, isLoading, ownerTokens };
     case "SET_TOKENS_ON_SALE":

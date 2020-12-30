@@ -27,18 +27,18 @@ const TokensPage = () => {
     const randomColor2 = '#'+ Math.floor(Math.random()*16777215).toString(16);
 
 
-    const gradient=[
+    const features=[
       randomColor1,
       randomColor2
     ]
-    await mintToken(gradient);
+    await mintToken(features);
     // update states;
      const payload = await fetchTokens();
-    dispatch({type: 'MINT_UPDATE', payload })
+    dispatch({type: 'UPDATE_TOKENS', payload })
   }
   return (
     <div className="TokensPage">
-      <h1>Gradient Tokens</h1>
+      <h1>Epic Tokens</h1>
       <Button onClick={handleMint} label="Breed Epic: cost 5 EPCOIN" />
       <div className="TokensPage-tokens">
         <WithLoader isLoading={isLoading}>

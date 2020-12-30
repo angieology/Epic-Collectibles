@@ -22,8 +22,10 @@ export default class GradientTokenStore {
   }
 
   setup = async () => {
-    const owner = await this.gradientTokenInstance.owner();
-    this.setOwner(owner);
+    // const owner = await this.gradientTokenInstance.owner();
+    // this.setOwner(owner)
+    const currentUserAccounts = await getAccounts();
+    this.setOwner(currentUserAccounts[0])
     await this.fetchTokens();
   }
 
@@ -54,7 +56,7 @@ export default class GradientTokenStore {
     // is equivalent to the token ID.
     // filter and save all index numbers of this owner into ownerTokens
     const newOwnerTokens = [];
-
+console.log('in fetch tokens, owner is', owners)
     owners.forEach((o, index) => {
       if (o.toString() === this.owner.toString()) {
         //replace whole ownerTokens

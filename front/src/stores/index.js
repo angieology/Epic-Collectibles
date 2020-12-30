@@ -14,7 +14,6 @@ const setupContracts = async () => {
     const auctionStore = new AuctionStore(contractsStore);
     if(contractsStore.auctionInstance) await auctionStore.setup();
 
-
     return {
         contractsStore,
         gradientTokenStore,

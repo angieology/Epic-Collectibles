@@ -3,8 +3,8 @@ import { createContext } from "react";
 // initial state TODO
 
 export const initialState = {
-  // tokens: [],
-  // owner: null
+//   tokens: [],
+//   owner: ''
 };
 
 const ContractContext = createContext();

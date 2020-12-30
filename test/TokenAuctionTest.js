@@ -72,8 +72,7 @@ contract("Auction", (accounts) => {
     });
     // next two tests are broken, but transfer events show in logs. also not reverting.
     it("Should make a successful bid", async () => {
-      const value = new BN(1);
-      const receipt = await auctionContract.bid(tokenId, {
+      const receipt = await auctionContract.bid(tokenId.toString(), {
         from: accounts[1],
         value: Web3.utils.toWei("1", "ether"),
         gas: "2000000",
@@ -90,7 +89,7 @@ contract("Auction", (accounts) => {
     });
 
     it("Should cancel auction", async () => {
-      const receipt = await auctionContract.cancel(tokenId);
+      const receipt = await auctionContract.cancel(tokenId.toString());
       // Event assertions can verify that the arguments are the expected ones
       expectEvent(receipt, "Transfer", {
         from: auctionContract.address,

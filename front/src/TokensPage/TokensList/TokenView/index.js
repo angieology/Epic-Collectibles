@@ -10,21 +10,29 @@ const TokenView = ({ token, onCloseClicked }) => {
   const [state, dispatch] = useContext(ContractContext);
 
   const [askPrice, setAskPrice] = useState(5);
+  const [bidPrice, setBidPrice] = useState(5);
+
   const [tokensOnSale, setTokensOnSale] = useState([]);
   const [ownerTokens, setOwnerTokens] = useState([]);
 
-  let createAuction, bid, cancel;
+  // let createAuction, bid, cancel, fetchTokens;
 
   const handleSellFormChange = (event) => {
     setAskPrice(event.target.value);
   };
+
+  const handleBidFormChange = (event) => {
+    setBidPrice(event.target.value);
+  }
   useEffect(() => {
     if (state) {
+      console.log({state})
       setTokensOnSale(state.tokensOnSale);
       setOwnerTokens(state.ownerTokens);
-      createAuction = state.createAuction;
-      bid = state.bid;
-      cancel = state.cancel;
+      // createAuction = state.createAuction;
+      // bid = state.bid;
+      // cancel = state.cancel;
+      // fetchTokens = state.fetchTokens;
     }
   }, [state]);
 
@@ -37,6 +45,25 @@ const TokenView = ({ token, onCloseClicked }) => {
 
     dispatch({ type: "SET_TOKENS_ON_SALE", payload: newAuctionRes });
   };
+
+  const handleBidSubmit = async () => {
+    const bidResult = await state.bid(tokenID, askPrice);
+    const updateTokenList = await state.fetchTokens();
+   
+    dispatch({ type: "SET_TOKENS_ON_SALE", payload: bidResult });
+    dispatch({type: 'UPDATE_TOKENS', payload: updateTokenList })
+  };
+
+
+console.log(token.index)
+console.log({isOwned})
+console.log({isOnSale})
+
+  const handleCancel = async () => {
+    const updatedTokensOnSale = await state.cancel(tokenID);
+    console.log({updatedTokensOnSale});
+    dispatch({ type: "SET_TOKENS_ON_SALE", payload: updatedTokensOnSale })
+  }
   return (
     <div className="TokenView-layout">
       <button className="close" onClick={onCloseClicked} />
@@ -60,6 +87,29 @@ const TokenView = ({ token, onCloseClicked }) => {
                 />
               </label>
               <button onClick={handleSellSubmit}>sell</button>
+            </>
+          )}
+
+          {isOwned && isOnSale && (
+            <>
+            <p>Currently on sale.</p>
+            <button onClick={handleCancel}>Cancel Auction</button>
+            </>
+          )}
+
+          {!isOwned && isOnSale && (
+            <>
+            <label>
+                Bid Price:{" "}
+                <input
+                  type="text"
+                  value={bidPrice}
+                  name="bidPrice"
+                  onChange={handleBidFormChange}
+                />
+              </label>
+              <button onClick={handleBidSubmit}>buy</button>
+              <span>{}</span>
             </>
           )}
         </div>
