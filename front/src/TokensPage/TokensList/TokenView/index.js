@@ -19,6 +19,10 @@ const TokenView = ({ token, onCloseClicked }) => {
 
   const [isOwned, isOnSale] = useTokenStatus(tokenID);
 
+  console.log("in token view", token);
+  const { element, name } = attributes;
+  const stats = JSON.parse(attributes.stats);
+  const abilities = JSON.parse(attributes.abilities);
 
   const handleSellFormChange = (event) => {
     setAskPrice(event.target.value);
@@ -27,7 +31,6 @@ const TokenView = ({ token, onCloseClicked }) => {
   const handleBidFormChange = (event) => {
     setBidPrice(event.target.value);
   };
- 
 
   const handleSellSubmit = async () => {
     const auctionRes = await state.createAuction(
@@ -57,17 +60,62 @@ const TokenView = ({ token, onCloseClicked }) => {
       <button className="close" onClick={onCloseClicked} />
 
       <div className="TokenView-content_wrapper">
-        {attributes && <TokenImage outer={attributes.outer} inner={attributes.inner} />}
+        <div>
+          {attributes && (
+            <TokenImage outer={attributes.outer} inner={attributes.inner} />
+          )}
 
+          <div className="TokenView-label bold-highlight">#{tokenID}</div>
+          {/* <div className="TokenView-label">
+            Skin: {`${attributes.outer} – ${attributes.inner}`}
+          </div> */}
+          <div className="TokenView-label">Name: {name}</div>
+          <div className="TokenView-label">Element: {element}</div>
+
+          {Object.entries(stats).map(([key, value]) => (
+            <div className="TokenView-label" key={key}>
+              {key}: {value}
+            </div>
+          ))}
+        </div>
         <div className="TokenView-details_wrapper">
-        <div className="TokenView-label">Token ID: <span className="bold-highlight">{tokenID}</span> </div>
-          <div className="TokenView-label">Skin: {`${attributes.outer} – ${attributes.inner}`}</div>
+          <div className="TokenView-label">
+            Abilities:
+            <ul>
+              {Object.entries(abilities).map(([key, value]) => (
+                <li>
+                  <div className="stat-layout">
+                    <span className="stat-key">{key}</span>{" "}
+                    <span className="stat-value">{value}</span>
+                  </div>
+                  <div className="stat-bar">
+                    <div
+                      className="stat-bar_filler"
+                      style={{ width: `${(value / 10000) * 100}%` }}
+                    ></div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="TokenView-actions">
+        <div>
           {isOwned && (
             <p className="text-with-icon">
               <PetIcon /> Owned by me{" "}
             </p>
           )}
+          {isOnSale && (
+            <p className="text-with-icon">
+              <LoyaltyIcon /> Currently on sale
+            </p>
+          )}
+        </div>
 
+        <div>
           {isOwned && !isOnSale && (
             <>
               <label>
@@ -79,18 +127,16 @@ const TokenView = ({ token, onCloseClicked }) => {
                   onChange={handleSellFormChange}
                 />
               </label>
-              <button onClick={handleSellSubmit} className="button button--winona button--border-thin button--round-s"
+              <button
+                onClick={handleSellSubmit}
+                className="button button--winona button--border-thin button--round-s"
                 data-text="Sell"
               >
                 <span>Sell</span>
               </button>
             </>
           )}
-          {isOnSale && (
-            <p className="text-with-icon">
-              <LoyaltyIcon /> Currently on sale
-            </p>
-          )}
+
           {isOwned && isOnSale && (
             <>
               <button
@@ -119,8 +165,7 @@ const TokenView = ({ token, onCloseClicked }) => {
                 className="button button--winona button--border-thin button--round-s "
                 data-text="Make Bid"
               >
-               
-               <span> Make Bid</span>
+                <span> Make Bid</span>
               </button>
               <span>{}</span>
             </>

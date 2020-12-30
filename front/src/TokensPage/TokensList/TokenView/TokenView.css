@@ -1,12 +1,12 @@
-/* .TokenView-layout {
-  position: relative
-} */
+.TokenView-layout {
+  height: fit-content;
+}
 
 .TokenView-content_wrapper {
   background-color: #e7dcd6;
   border-radius: 10px;
   margin-bottom: 20px;
-  padding: 50px;
+  padding: 40px;
 
 
   display: flex;
@@ -20,6 +20,24 @@
 
 .TokenView-details_wrapper {
   margin-left: 50px;
+  width: 100%;
+}
+
+.TokenView-actions {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* .TokenView-actions > * {
+  display: flex;
+  flex-direction: column;
+} */
+
+.TokenView-actions > :last-child {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-around;
 }
 
 .close {
@@ -50,3 +68,47 @@
   transform: rotate(-45deg);
 }
 
+@keyframes growFromLeft {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+.stat-bar {
+  height: 20px;
+  /* width: 100%; */
+  border-radius: 20px;
+  background: linear-gradient(to right, pink, white);
+
+}
+.stat-bar_filler {
+  background: linear-gradient(to right, rgb(214, 72, 72), rgb(238, 153, 181));
+  height: 100%;
+  border-radius: inherit;
+  transition: width .2s ease-in;
+}
+
+.stat-layout {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  height: 35px;
+}
+
+.stat-key {
+  position: absolute;
+  left: 0;
+
+}
+
+.stat-value {
+font-size: 28px;
+font-weight: 300;
+
+position: absolute;
+right:25px;
+bottom: -10px;
+}

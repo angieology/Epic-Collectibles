@@ -2,7 +2,6 @@ import contract from "truffle-contract";
 import getProvider from "./getProvider";
 import AuctionArtifact from "../contracts/TokenAuction.json";
 import addresses from "../addresses.json";
-import getAccounts from "./getAccounts";
 
 const { auctionAddress } = addresses;
 

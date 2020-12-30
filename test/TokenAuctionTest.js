@@ -6,6 +6,11 @@ const {
   BN,
 } = require("@openzeppelin/test-helpers");
 
+const attributes = ["#ff00dd", 
+"#ddddff", "fire", "Coramon",
+ "{health: 100, weight: 400, height: 300}",
+  "{power: 400, defense: 300}" ]
+
 const EpicToken = artifacts.require("EpicToken");
 const TokenAuction = artifacts.require("TokenAuction");
 
@@ -23,7 +28,7 @@ contract("Auction", (accounts) => {
     before(async () => {
       nft = await EpicToken.new();
       auctionContract = await TokenAuction.new(nft.address);
-      await nft.mint("#ff00dd", "#ddddff", {
+      await nft.mint(...attributes, {
         from: accounts[0],
         value: Web3.utils.toWei("5", "ether"),
       });
@@ -51,7 +56,7 @@ contract("Auction", (accounts) => {
     beforeEach(async () => {
       nft = await EpicToken.new();
       auctionContract = await TokenAuction.new(nft.address);
-      await nft.mint("#ff00dd", "#ddddff", {
+      await nft.mint(...attributes, {
         from: accounts[0],
         value: Web3.utils.toWei("5", "ether"),
       });

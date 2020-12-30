@@ -70,7 +70,8 @@
   input {
 	width: 50px;
     padding: 2%;
-    border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid navajowhite;
   }
 /* Common button styles */
 .button {

@@ -38,7 +38,7 @@ export default class AuctionStore {
         return this.auctionInstance.tokenIdToAuction(tokenId);
       })
     );
-    console.log('live auctions', saleTokensRaw)
+    console.log("live auctions", saleTokensRaw);
     // seller should not be zero address
     const updatedTokensOnSale = [];
     const updateTokenIDToSeller = {};
@@ -50,7 +50,12 @@ export default class AuctionStore {
     });
     this.setTokensOnSale(updatedTokensOnSale);
     this.tokenIDToSeller = updateTokenIDToSeller;
-    return {tokensOnSale: updatedTokensOnSale, tokenIDToSeller: updateTokenIDToSeller};
+    console.log({ updatedTokensOnSale });
+    console.log({ updateTokenIDToSeller });
+    return {
+      tokensOnSale: updatedTokensOnSale,
+      tokenIDToSeller: updateTokenIDToSeller,
+    };
   };
 
   setTokensOnSale = (tokensOnSale) => {

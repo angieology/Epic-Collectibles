@@ -4,6 +4,13 @@ const {
   expectRevert, // Assertions for transactions that should fail
 } = require("@openzeppelin/test-helpers");
 
+const attributes = ["#ff00dd", 
+"#ddddff", "fire", "Coramon",
+ "{health: 100, weight: 400, height: 300}",
+  "{power: 400, defense: 300}" ]
+
+
+
 const EpicToken = artifacts.require("EpicToken");
 
 contract("Epic token", (accounts) => {
@@ -17,8 +24,8 @@ contract("Epic token", (accounts) => {
     it("creates token with specified outer and inner colors", async () => {
       let instance = await EpicToken.deployed();
       let owner = await instance.owner();
-
-      await instance.mint("#ff00dd", "#ddddff", {
+      
+      await instance.mint(...attributes , {
         from: accounts[0],
         value: Web3.utils.toWei("5", "ether"),
       });
@@ -37,7 +44,7 @@ contract("Epic token", (accounts) => {
 
       await instance.transferOwnership(other);
 
-      await instance.mint("#ff00dd", "#ddddff", {
+      await instance.mint(...attributes, {
         from: accounts[0],
         value: Web3.utils.toWei("5", "ether"),
       });

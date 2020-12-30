@@ -14,6 +14,7 @@ import "./TokenItem.css";
 const TokenItem = ({ token }) => {
   const { attributes, index: tokenID } = token;
   const [isOwned, isOnSale] = useTokenStatus(tokenID);
+  console.log('in token view', token)
 
   const { isModalOpen, openModal, closeModal } = useModal();
 
@@ -37,11 +38,11 @@ const TokenItem = ({ token }) => {
               {isOwned && <PetsIcon />}
             </span>
             <span className="TokenItem-details_info">
-              <div className="TokenItem-label">
-                Token ID: <span className="bold-highlight">{tokenID}</span>{" "}
+              <div className="TokenItem-label bold-highlight">
+               #{tokenID}
               </div>
 
-              <button onClick={openModal}>view details</button>
+              <a onClick={openModal}>Overview</a>
             </span>
           </div>
         </div>
