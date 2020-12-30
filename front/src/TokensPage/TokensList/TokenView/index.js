@@ -43,11 +43,22 @@ const TokenView = ({ token, onCloseClicked }) => {
   };
 
   const handleBidSubmit = async () => {
-    const auctionRes = await state.bid(tokenID, askPrice);
-    const updateTokenList = await state.fetchTokens();
+  
+    if (isNaN(bidPrice)) { alert('Enter a number'); return }
+    if (bidPrice < parseInt(price)) {
+      alert("Can't bid lower than the ask price");
+      return;
+    }
+    try {
+      const auctionRes = await state.bid(tokenID, bidPrice);
 
-    dispatch({ type: "SET_TOKENS_ON_SALE", payload: auctionRes });
-    dispatch({ type: "UPDATE_TOKENS", payload: updateTokenList });
+      const updateTokenList = await state.fetchTokens();
+
+      dispatch({ type: "SET_TOKENS_ON_SALE", payload: auctionRes });
+      dispatch({ type: "UPDATE_TOKENS", payload: updateTokenList });
+    } catch (e) {
+      console.warn();
+    }
   };
 
   const handleCancel = async () => {
@@ -63,7 +74,7 @@ const TokenView = ({ token, onCloseClicked }) => {
         <div className={`TokenView-content_wrapper `}>
           <div>
             {attributes && (
-              <TokenImage outer={attributes.outer} inner={attributes.inner}/>
+              <TokenImage outer={attributes.outer} inner={attributes.inner} />
             )}
 
             <div className="TokenView-label bean">#{tokenID}</div>
