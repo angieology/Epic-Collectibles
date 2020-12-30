@@ -62,7 +62,6 @@ const TokensPage = () => {
       JSON.stringify(abilities),
     ];
 
-    console.log({features})
     await mintToken(features);
     // update states;
     const payload = await fetchTokens();

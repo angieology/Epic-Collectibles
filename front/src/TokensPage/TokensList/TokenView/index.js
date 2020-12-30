@@ -19,7 +19,6 @@ const TokenView = ({ token, onCloseClicked }) => {
 
   const [isOwned, isOnSale] = useTokenStatus(tokenID);
 
-  console.log("in token view", token);
   const { element, name } = attributes;
   const stats = JSON.parse(attributes.stats);
   const abilities = JSON.parse(attributes.abilities);
@@ -66,9 +65,6 @@ const TokenView = ({ token, onCloseClicked }) => {
           )}
 
           <div className="TokenView-label bold-highlight">#{tokenID}</div>
-          {/* <div className="TokenView-label">
-            Skin: {`${attributes.outer} – ${attributes.inner}`}
-          </div> */}
           <div className="TokenView-label">Name: {name}</div>
           <div className="TokenView-label">Element: {element}</div>
 

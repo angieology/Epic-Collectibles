@@ -6,7 +6,7 @@ const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
 export default class AuctionStore {
   tokensOnSale = [];
-  tokenIDToSeller = {};
+  tokenToAuction = {};
 
   // Auction depends on the existence of its instance in the contract store
   // and a epic token to construct the auction
@@ -41,20 +41,21 @@ export default class AuctionStore {
     console.log("live auctions", saleTokensRaw);
     // seller should not be zero address
     const updatedTokensOnSale = [];
-    const updateTokenIDToSeller = {};
+    const updateTokenToAuction = {};
     saleTokensRaw.forEach((auction, tokenID) => {
-      if (auction.seller !== ZERO_ADDRESS) {
+      if (auction.seller.toString() !== ZERO_ADDRESS) {
         updatedTokensOnSale.push(tokenID);
-        updateTokenIDToSeller[tokenID] = auction.seller;
+        updateTokenToAuction[tokenID] = {
+          seller: auction.seller.toString(),
+          price: Web3.utils.fromWei(auction.price.toString(), "ether"),
+        };
       }
     });
     this.setTokensOnSale(updatedTokensOnSale);
-    this.tokenIDToSeller = updateTokenIDToSeller;
-    console.log({ updatedTokensOnSale });
-    console.log({ updateTokenIDToSeller });
+    this.tokenToAuction = updateTokenToAuction;
     return {
       tokensOnSale: updatedTokensOnSale,
-      tokenIDToSeller: updateTokenIDToSeller,
+      tokenToAuction: updateTokenToAuction,
     };
   };
 

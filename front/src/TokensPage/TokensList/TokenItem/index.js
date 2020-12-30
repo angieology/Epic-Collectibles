@@ -14,7 +14,6 @@ import "./TokenItem.css";
 const TokenItem = ({ token }) => {
   const { attributes, index: tokenID } = token;
   const [isOwned, isOnSale] = useTokenStatus(tokenID);
-  console.log('in token view', token)
 
   const { isModalOpen, openModal, closeModal } = useModal();
 

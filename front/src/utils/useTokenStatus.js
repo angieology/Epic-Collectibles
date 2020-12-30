@@ -6,7 +6,7 @@ const useTokenStatus = (tokenID) => {
 
   const [tokensOnSale, setTokensOnSale] = useState([]);
   const [ownerTokens, setOwnerTokens] = useState([]);
-  const [tokenIDToSeller, setTokenIDToSeller] = useState({});
+  const [tokenToAuction, setTokenToAuction] = useState({});
 
   const [isOwned, setIsOwned] = useState(false);
   const [isOnSale, setIsOnSale] = useState(false);
@@ -15,7 +15,7 @@ const useTokenStatus = (tokenID) => {
     if (state) {
       setTokensOnSale(state.tokensOnSale);
       setOwnerTokens(state.ownerTokens);
-      setTokenIDToSeller(state.tokenIDToSeller);
+      setTokenToAuction(state.tokenToAuction);
     }
   }, [state]);
 
@@ -24,19 +24,16 @@ const useTokenStatus = (tokenID) => {
     // belongs to user, also check auction for 'seller' listings
     const newOwned =
       (ownerTokens && ownerTokens.includes(tokenID)) ||
-      (tokenIDToSeller &&
-        tokenIDToSeller[tokenID] &&
-        tokenIDToSeller[tokenID] === state.owner.toString());
+      (tokenToAuction &&
+        tokenToAuction[tokenID] &&
+        tokenToAuction[tokenID].seller === state.owner.toString());
     setIsOwned(newOwned);
-  }, [ownerTokens, tokensOnSale, tokenIDToSeller]);
+  }, [ownerTokens, tokensOnSale, tokenToAuction]);
 
   useEffect(() => {
     const newSale = tokensOnSale && tokensOnSale.includes(tokenID);
     setIsOnSale(newSale);
   });
-  console.log({ tokenID });
-  console.log({ isOwned });
-  console.log({ isOnSale });
   return [isOwned, isOnSale];
 };
 
