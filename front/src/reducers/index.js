@@ -10,7 +10,8 @@ const Reducer = (state, action) => {
       const { tokens, isLoading, ownerTokens } = action.payload;
       return { ...state, tokens, isLoading, ownerTokens };
     case "SET_TOKENS_ON_SALE":
-      return { ...state, tokensOnSale: action.payload};
+      const { tokensOnSale, tokenIDToSeller } = action.payload;
+      return { ...state, tokensOnSale, tokenIDToSeller};
     default:
       return state;
   }

@@ -18,17 +18,21 @@ const TokenItem = ({ token }) => {
 
   const [tokensOnSale, setTokensOnSale] = useState([]);
   const [ownerTokens, setOwnerTokens] = useState([]);
+  const [tokenIDToSeller, setTokenIDToSeller] = useState({});
+
 
   useEffect(() => {
     if (state) {
       console.log({ state });
       setTokensOnSale(state.tokensOnSale);
       setOwnerTokens(state.ownerTokens);
+      setTokenIDToSeller(state.tokenIDToSeller);
+
     }
   }, [state]);
 
   const isOnSale = tokensOnSale && tokensOnSale.includes(token.index);
-  const isOwned = ownerTokens && ownerTokens.includes(token.index);
+  const isOwned = (ownerTokens && ownerTokens.includes(token.index)) || (tokenIDToSeller && tokenIDToSeller[token.index] && tokenIDToSeller[token.index] === state.owner.toString());
 
   return (
     <>

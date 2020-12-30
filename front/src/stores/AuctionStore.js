@@ -6,6 +6,7 @@ const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
 export default class AuctionStore {
   tokensOnSale = [];
+  tokenIDToSeller = {};
 
   // Auction depends on the existence of its instance in the contract store
   // and a gradient token to construct the auction
@@ -40,13 +41,16 @@ export default class AuctionStore {
     console.log('live auctions', saleTokensRaw)
     // seller should not be zero address
     const updatedTokensOnSale = [];
+    const updateTokenIDToSeller = {};
     saleTokensRaw.forEach((auction, tokenID) => {
       if (auction.seller !== ZERO_ADDRESS) {
         updatedTokensOnSale.push(tokenID);
+        updateTokenIDToSeller[tokenID] = auction.seller;
       }
     });
     this.setTokensOnSale(updatedTokensOnSale);
-    return updatedTokensOnSale;
+    this.tokenIDToSeller = updateTokenIDToSeller;
+    return {tokensOnSale: updatedTokensOnSale, tokenIDToSeller: updateTokenIDToSeller};
   };
 
   setTokensOnSale = (tokensOnSale) => {
@@ -78,8 +82,8 @@ export default class AuctionStore {
       await this.auctionInstance.createAuction(tokenID, priceInWei, {
         from: accounts[0],
       });
-      const updatedTokensOnSale = await this.fetchActiveAuctions();
-      return updatedTokensOnSale;
+      const tokenUpdate = await this.fetchActiveAuctions();
+      return tokenUpdate;
     } catch (e) {
       console.warn(e);
     }
