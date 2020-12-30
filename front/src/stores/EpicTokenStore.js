@@ -2,8 +2,8 @@ import getAccounts from "../utils/getAccounts";
 
 var Web3 = require("web3");
 
-// handles all gradient token contract related functionality, per owner
-export default class GradientTokenStore {
+// handles all epic token contract related functionality, per owner
+export default class EpicTokenStore {
   // array of int TokenID
   tokens = [];
   // array of int TokenID
@@ -14,15 +14,15 @@ export default class GradientTokenStore {
 
   constructor(contractsStore) {
     this.contractsStore = contractsStore;
-    // if (contractsStore.gradientTokenInstance) this.setup();
+    // if (contractsStore.epicTokenInstance) this.setup();
   }
 
-  get gradientTokenInstance() {
-    return this.contractsStore && this.contractsStore.gradientTokenInstance;
+  get epicTokenInstance() {
+    return this.contractsStore && this.contractsStore.epicTokenInstance;
   }
 
   setup = async () => {
-    // const owner = await this.gradientTokenInstance.owner();
+    // const owner = await this.epicTokenInstance.owner();
     // this.setOwner(owner)
     const currentUserAccounts = await getAccounts();
     this.setOwner(currentUserAccounts[0])
@@ -45,11 +45,11 @@ export default class GradientTokenStore {
   fetchTokens = async () => {
     // get all tokens of owner:
     // roundabout way since ownerOf is depreciated
-    const supply = await this.gradientTokenInstance.totalSupply();
+    const supply = await this.epicTokenInstance.totalSupply();
 
     const owners = await Promise.all(
         [...Array(supply.toNumber()).keys()].map(async (token) => {
-        return this.gradientTokenInstance.ownerOf(token);
+        return this.epicTokenInstance.ownerOf(token);
       })
     );
     // all token IDs are indexed from 0. The index of the owner address in the owners address
@@ -66,40 +66,42 @@ console.log('in fetch tokens, owner is', owners)
     })
     this.ownerTokens = newOwnerTokens;
 
-    // get gradient details for all tokens
-    const gradients = await Promise.all(
+    // get epic details for all tokens
+    const epics = await Promise.all(
         [...Array(supply.toNumber()).keys()].map(async (token) => {
-        return this.gradientTokenInstance.getGradient(token);
+        return this.epicTokenInstance.getEpic(token);
       })
     );
     this.setIsLoading(false);
-    if (!gradients.length) {
+    if (!epics.length) {
       return;
     }
     // mobx style - depreciated
-    const newTokens = this.indexedTokens(gradients);
+    const newTokens = this.indexedTokens(epics);
+    console.log({newTokens})
     this.setTokens(newTokens);
     return {tokens: newTokens, isLoading: false, ownerTokens: newOwnerTokens};
   };
-  indexedTokens(gradients) {
-    return gradients.map((gradient, index) => {
+
+  indexedTokens(epics) {
+    return epics.map((epic, index) => {
       return {
-        gradient,
+        attributes: epic,
         index,
       };
     });
   }
   // create new ones
-  mintToken = async (gradient) => {
+  mintToken = async (epic) => {
 
     const accounts = await getAccounts();
-    await this.gradientTokenInstance.mint(gradient[0], gradient[1], {
+    await this.epicTokenInstance.mint(epic[0], epic[1], {
       from: accounts[0],
       value: Web3.utils.toWei("5", "ether")
     //   gas: 200000 // only manually set gas if not using wallet (ie. httpProvider)
      });
      // TODO might be better to fetch new list of tokens?
-    this.appendToken({ gradient, index: this.tokens.length });
+    this.appendToken({ epic, index: this.tokens.length });
   };
   appendToken(token) {
     this.tokens.push(token);

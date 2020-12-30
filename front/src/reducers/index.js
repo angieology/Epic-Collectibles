@@ -3,7 +3,7 @@ const Reducer = (state, action) => {
     case "UPDATE_STORE":
       return {
         ...state,
-        ...action.gradientTokenStore,
+        ...action.epicTokenStore,
         ...action.auctionStore,
       };
     case "UPDATE_TOKENS":

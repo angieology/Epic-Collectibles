@@ -12,15 +12,15 @@ import TokenImage from "../../../components/TokenImage";
 import "./TokenItem.css";
 
 const TokenItem = ({ token }) => {
-  const [isOwned, isOnSale] = useTokenStatus(token.index);
+  const { attributes, index: tokenID } = token;
+  const [isOwned, isOnSale] = useTokenStatus(tokenID);
 
   const { isModalOpen, openModal, closeModal } = useModal();
-  const gradient = token.gradient;
 
   return (
     <>
       <Modal
-        id={`token-item-modal-${token.index}`}
+        id={`token-item-modal-${tokenID}`}
         isOpen={isModalOpen}
         transition={ModalTransition.BOTTOM_UP}
         onBackdropClick={closeModal}
@@ -29,7 +29,7 @@ const TokenItem = ({ token }) => {
       </Modal>
       <div className="TokenItem" onClick={openModal}>
         <div className="TokenItem-background_style" onClick={openModal}>
-          <TokenImage outer={gradient.outer} inner={gradient.inner} />
+          {attributes && <TokenImage outer={attributes.outer} inner={attributes.inner} />}
 
           <div className="TokenItem-details">
             <span className="TokenItem-details_icons">
@@ -38,7 +38,7 @@ const TokenItem = ({ token }) => {
             </span>
             <span className="TokenItem-details_info">
               <div className="TokenItem-label">
-                Token ID: <span className="bold-highlight">{token.index}</span>{" "}
+                Token ID: <span className="bold-highlight">{tokenID}</span>{" "}
               </div>
 
               <button onClick={openModal}>view details</button>

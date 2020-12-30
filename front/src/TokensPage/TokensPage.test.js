@@ -5,14 +5,14 @@ import renderer from "react-test-renderer";
 import TokensPage from "./index";
 
 describe("<TokensPage />", () => {
-  const gradientTokenStore = {
+  const epicTokenStore = {
     mintToken: jest.fn(),
     tokens: []
   };
   const modalStore = {
     showModal: jest.fn()
   };
-  const stores = { gradientTokenStore, modalStore };
+  const stores = { epicTokenStore, modalStore };
 
   it("renders and matches the snapshot", () => {
     const component = renderer.create(

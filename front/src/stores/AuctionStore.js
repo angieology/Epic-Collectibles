@@ -9,7 +9,7 @@ export default class AuctionStore {
   tokenIDToSeller = {};
 
   // Auction depends on the existence of its instance in the contract store
-  // and a gradient token to construct the auction
+  // and a epic token to construct the auction
   constructor(contractsStore) {
     this.contractsStore = contractsStore;
   }
@@ -31,7 +31,7 @@ export default class AuctionStore {
     // roundabout way to fetch all tokens on sale, since we cannot retrieve the entire mapping at once
     // const accounts = await getAccounts();
 
-    const supply = await this.contractsStore.gradientTokenInstance.totalSupply();
+    const supply = await this.contractsStore.epicTokenInstance.totalSupply();
 
     const saleTokensRaw = await Promise.all(
       [...Array(supply.toNumber()).keys()].map(async (tokenId) => {
@@ -69,11 +69,11 @@ export default class AuctionStore {
     try {
       const accounts = await getAccounts();
       const priceInWei = Web3.utils.toWei(askPrice.toString(), "ether");
-      const tokenIndex = await this.contractsStore.gradientTokenInstance.tokenByIndex(
+      const tokenIndex = await this.contractsStore.epicTokenInstance.tokenByIndex(
         tokenID,
         { from: accounts[0] }
       );
-      await this.contractsStore.gradientTokenInstance.approve(
+      await this.contractsStore.epicTokenInstance.approve(
         this.auctionInstance.address,
         tokenIndex,
         { from: accounts[0] }

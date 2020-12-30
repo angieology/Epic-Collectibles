@@ -4,8 +4,8 @@ import renderer from "react-test-renderer";
 import TokensList from "./index";
 
 describe("<TokensList />", () => {
-  const mockGradientTokenStore = {
-    tokens: [{ index: 0, gradient: ["#fff", "#000"] }]
+  const mockEpicTokenStore = {
+    tokens: [{ index: 0, epic: ["#fff", "#000"] }]
   };
   const mockModalStore = {
     modalStore: jest.fn()
@@ -14,7 +14,7 @@ describe("<TokensList />", () => {
   it("renders and matches the snapshot", () => {
     const component = renderer.create(
       <TokensList.wrappedComponent
-        gradientTokenStore={mockGradientTokenStore}
+        epicTokenStore={mockEpicTokenStore}
         modalStore={mockModalStore}
       />
     );

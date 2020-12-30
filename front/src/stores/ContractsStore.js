@@ -1,17 +1,17 @@
-import getGradientContractInstance from "../utils/getGradientContractInstance";
+import getEpicContractInstance from "../utils/getEpicContractInstance";
 import getAuctionContractInstance from '../utils/getAuctionContractInstance';
 //store all contract instances, including auction
 export default class ContractsStore {
-  gradientTokenInstance = null;
+  epicTokenInstance = null;
   auctionInstance = null; //TODO
 
   async setup() {
-      this.setGradientTokenInstance(await getGradientContractInstance());
+      this.setEpicTokenInstance(await getEpicContractInstance());
       this.setAuctionInstance(await getAuctionContractInstance());
   }
 
-  setGradientTokenInstance(gradientTokenInstance) {
-    this.gradientTokenInstance = gradientTokenInstance;
+  setEpicTokenInstance(epicTokenInstance) {
+    this.epicTokenInstance = epicTokenInstance;
   }
 
   setAuctionInstance(auctionInstance) {

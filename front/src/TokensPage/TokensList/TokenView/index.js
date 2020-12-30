@@ -11,7 +11,7 @@ import useTokenStatus from "../../../utils/useTokenStatus";
 import "./TokenView.css";
 
 const TokenView = ({ token, onCloseClicked }) => {
-  const { index: tokenID, gradient } = token;
+  const { index: tokenID, attributes } = token;
   const [state, dispatch] = useContext(ContractContext);
 
   const [askPrice, setAskPrice] = useState(5);
@@ -57,11 +57,11 @@ const TokenView = ({ token, onCloseClicked }) => {
       <button className="close" onClick={onCloseClicked} />
 
       <div className="TokenView-content_wrapper">
-        <TokenImage outer={gradient.outer} inner={gradient.inner} />
+        {attributes && <TokenImage outer={attributes.outer} inner={attributes.inner} />}
 
         <div className="TokenView-details_wrapper">
         <div className="TokenView-label">Token ID: <span className="bold-highlight">{tokenID}</span> </div>
-          <div className="TokenView-label">Skin: {`${gradient.outer} – ${gradient.inner}`}</div>
+          <div className="TokenView-label">Skin: {`${attributes.outer} – ${attributes.inner}`}</div>
           {isOwned && (
             <p className="text-with-icon">
               <PetIcon /> Owned by me{" "}
@@ -79,7 +79,7 @@ const TokenView = ({ token, onCloseClicked }) => {
                   onChange={handleSellFormChange}
                 />
               </label>
-              <button onClick={handleSellSubmit} class="button button--winona button--border-thin button--round-s"
+              <button onClick={handleSellSubmit} className="button button--winona button--border-thin button--round-s"
                 data-text="Sell"
               >
                 <span>Sell</span>
@@ -95,7 +95,7 @@ const TokenView = ({ token, onCloseClicked }) => {
             <>
               <button
                 onClick={handleCancel}
-                class="button button--winona button--border-thin button--round-s"
+                className="button button--winona button--border-thin button--round-s"
                 data-text="Cancel Auction"
               >
                 <span>Cancel Auction</span>
@@ -116,7 +116,7 @@ const TokenView = ({ token, onCloseClicked }) => {
               </label>
               <button
                 onClick={handleBidSubmit}
-                class="button button--winona button--border-thin button--round-s "
+                className="button button--winona button--border-thin button--round-s "
                 data-text="Make Bid"
               >
                

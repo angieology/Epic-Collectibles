@@ -11,8 +11,8 @@ function App() {
 
   useEffect(() => {
     async function initializeContracts() {
-      const { gradientTokenStore, auctionStore } = await setupContracts();
-      dispatch({ type: "UPDATE_STORE", gradientTokenStore, auctionStore });
+      const { epicTokenStore, auctionStore } = await setupContracts();
+      dispatch({ type: "UPDATE_STORE", epicTokenStore, auctionStore });
     }
     initializeContracts();
   }, []);

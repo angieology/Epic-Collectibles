@@ -1,4 +1,4 @@
-const GradientToken = artifacts.require("GradientToken");
+const EpicToken = artifacts.require("EpicToken");
 const TokenAuction = artifacts.require("TokenAuction");
 const util = require("util");
 const fs = require("fs");
@@ -6,13 +6,13 @@ const path = require("path");
 const writeFile = util.promisify(fs.writeFile);
 
 module.exports = async function(deployer) {
-  const gradientToken = await deployer.deploy(GradientToken);
+  const epicToken = await deployer.deploy(EpicToken);
   const auctionContract = await deployer.deploy(
     TokenAuction,
-    GradientToken.address
+    EpicToken.address
   );
   const addresses = {
-    tokenAddress: GradientToken.address,
+    tokenAddress: EpicToken.address,
     auctionAddress: TokenAuction.address
   };
 

@@ -6,12 +6,12 @@ const {
   BN,
 } = require("@openzeppelin/test-helpers");
 
-const GradientToken = artifacts.require("GradientToken");
+const EpicToken = artifacts.require("EpicToken");
 const TokenAuction = artifacts.require("TokenAuction");
 
 contract("Auction", (accounts) => {
   it("Should accept nft on creation", async () => {
-    let nft = await GradientToken.new();
+    let nft = await EpicToken.new();
     let auction = await TokenAuction.new(nft.address);
     const nftAddr = await auction.nonFungibleContract();
     assert.equal(nftAddr, nft.address);
@@ -21,7 +21,7 @@ contract("Auction", (accounts) => {
     let nft, auctionContract, tokenId;
 
     before(async () => {
-      nft = await GradientToken.new();
+      nft = await EpicToken.new();
       auctionContract = await TokenAuction.new(nft.address);
       await nft.mint("#ff00dd", "#ddddff", {
         from: accounts[0],
@@ -49,7 +49,7 @@ contract("Auction", (accounts) => {
     let nft, auctionContract, tokenId;
 
     beforeEach(async () => {
-      nft = await GradientToken.new();
+      nft = await EpicToken.new();
       auctionContract = await TokenAuction.new(nft.address);
       await nft.mint("#ff00dd", "#ddddff", {
         from: accounts[0],
