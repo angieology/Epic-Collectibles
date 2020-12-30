@@ -20,7 +20,12 @@
   background-color: #e7dcd6;
   border-radius: 10px;
   padding: 40px 20px;
-  margin-bottom: 15px;
   box-shadow: rgb(255, 255, 255) 0px 0px 0px 0px inset;
   transition: box-shadow 0.2s;
+}
+
+.TokenItem-details {
+  display: flex;
+  justify-content: space-between;
+  height: 28px;
 }

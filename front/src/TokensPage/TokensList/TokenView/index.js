@@ -15,7 +15,6 @@ const TokenView = ({ token, onCloseClicked }) => {
   const [tokensOnSale, setTokensOnSale] = useState([]);
   const [ownerTokens, setOwnerTokens] = useState([]);
 
-  // let createAuction, bid, cancel, fetchTokens;
 
   const handleSellFormChange = (event) => {
     setAskPrice(event.target.value);
@@ -29,10 +28,6 @@ const TokenView = ({ token, onCloseClicked }) => {
       console.log({state})
       setTokensOnSale(state.tokensOnSale);
       setOwnerTokens(state.ownerTokens);
-      // createAuction = state.createAuction;
-      // bid = state.bid;
-      // cancel = state.cancel;
-      // fetchTokens = state.fetchTokens;
     }
   }, [state]);
 
