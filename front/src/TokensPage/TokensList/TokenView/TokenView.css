@@ -50,11 +50,3 @@
   transform: rotate(-45deg);
 }
 
-.text-with-icon {
-  display: flex;
-  align-items: center;
-}
-
-.text-with-icon > :first-child {
-  margin-right: 10px;
-}

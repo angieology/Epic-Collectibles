@@ -38,7 +38,7 @@ const TokensPage = () => {
   }
   return (
     <div className="TokensPage">
-      <h1>Epic Tokens</h1>
+      <h1>Epic Pets</h1>
       <Button onClick={handleMint} label="Breed Epic: cost 5 EPCOIN" />
       <div className="TokensPage-tokens">
         <WithLoader isLoading={isLoading}>

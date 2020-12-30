@@ -1,38 +1,21 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Modal, useModal, ModalTransition } from "react-simple-hook-modal";
+import "react-simple-hook-modal/dist/styles.css";
+import PetsIcon from "@material-ui/icons/Pets";
+import LoyaltyIcon from "@material-ui/icons/Loyalty";
 
 import TokenView from "../TokenView";
-import ContractContext from "../../../Store";
+import useTokenStatus from "../../../utils/useTokenStatus";
 import TokenImage from "../../../components/TokenImage";
-import "react-simple-hook-modal/dist/styles.css";
-import LoyaltyIcon from "@material-ui/icons/Loyalty";
-import PetsIcon from "@material-ui/icons/Pets";
+
 import "./TokenItem.css";
 
 const TokenItem = ({ token }) => {
-  const [state] = useContext(ContractContext);
+  const [isOwned, isOnSale] = useTokenStatus(token.index);
 
   const { isModalOpen, openModal, closeModal } = useModal();
   const gradient = token.gradient;
-
-  const [tokensOnSale, setTokensOnSale] = useState([]);
-  const [ownerTokens, setOwnerTokens] = useState([]);
-  const [tokenIDToSeller, setTokenIDToSeller] = useState({});
-
-
-  useEffect(() => {
-    if (state) {
-      console.log({ state });
-      setTokensOnSale(state.tokensOnSale);
-      setOwnerTokens(state.ownerTokens);
-      setTokenIDToSeller(state.tokenIDToSeller);
-
-    }
-  }, [state]);
-
-  const isOnSale = tokensOnSale && tokensOnSale.includes(token.index);
-  const isOwned = (ownerTokens && ownerTokens.includes(token.index)) || (tokenIDToSeller && tokenIDToSeller[token.index] && tokenIDToSeller[token.index] === state.owner.toString());
 
   return (
     <>
@@ -44,8 +27,8 @@ const TokenItem = ({ token }) => {
       >
         <TokenView token={token} onCloseClicked={closeModal} />{" "}
       </Modal>
-      <div className="TokenItem"  onClick={openModal}>
-        <div className="TokenItem-background_style"  onClick={openModal}>
+      <div className="TokenItem" onClick={openModal}>
+        <div className="TokenItem-background_style" onClick={openModal}>
           <TokenImage outer={gradient.outer} inner={gradient.inner} />
 
           <div className="TokenItem-details">
@@ -54,7 +37,10 @@ const TokenItem = ({ token }) => {
               {isOwned && <PetsIcon />}
             </span>
             <span className="TokenItem-details_info">
-              {/* <div className="TokenItem-label">{`${gradient.outer} – ${gradient.outer}`}</div> */}
+              <div className="TokenItem-label">
+                Token ID: <span className="bold-highlight">{token.index}</span>{" "}
+              </div>
+
               <button onClick={openModal}>view details</button>
             </span>
           </div>

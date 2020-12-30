@@ -6,6 +6,7 @@ import LoyaltyIcon from "@material-ui/icons/Loyalty";
 
 import TokenImage from "../../../components/TokenImage";
 import ContractContext from "../../../Store";
+import useTokenStatus from "../../../utils/useTokenStatus";
 
 import "./TokenView.css";
 
@@ -16,12 +17,8 @@ const TokenView = ({ token, onCloseClicked }) => {
   const [askPrice, setAskPrice] = useState(5);
   const [bidPrice, setBidPrice] = useState(5);
 
-  const [tokensOnSale, setTokensOnSale] = useState([]);
-  const [ownerTokens, setOwnerTokens] = useState([]);
-  const [tokenIDToSeller, setTokenIDToSeller] = useState({});
+  const [isOwned, isOnSale] = useTokenStatus(tokenID);
 
-  const [isOwned, setIsOwned] = useState(false);
-  const [isOnSale, setIsOnSale] = useState(false);
 
   const handleSellFormChange = (event) => {
     setAskPrice(event.target.value);
@@ -30,29 +27,7 @@ const TokenView = ({ token, onCloseClicked }) => {
   const handleBidFormChange = (event) => {
     setBidPrice(event.target.value);
   };
-  useEffect(() => {
-    if (state) {
-      setTokensOnSale(state.tokensOnSale);
-      setOwnerTokens(state.ownerTokens);
-      setTokenIDToSeller(state.tokenIDToSeller);
-    }
-  }, [state]);
-
-  useEffect(() => {
-    // if item is on sale, the auction is the 'owner'. To check if this token really
-    // belongs to user, also check auction for 'seller' listings
-    const newOwned =
-      (ownerTokens && ownerTokens.includes(tokenID)) ||
-      (tokenIDToSeller &&
-        tokenIDToSeller[tokenID] &&
-        tokenIDToSeller[tokenID] === state.owner.toString());
-    setIsOwned(newOwned);
-  }, [ownerTokens, tokensOnSale, tokenIDToSeller]);
-
-  useEffect(()=> {
-    const newSale = tokensOnSale && tokensOnSale.includes(tokenID);
-    setIsOnSale(newSale);
-  })
+ 
 
   const handleSellSubmit = async () => {
     const auctionRes = await state.createAuction(
@@ -85,7 +60,8 @@ const TokenView = ({ token, onCloseClicked }) => {
         <TokenImage outer={gradient.outer} inner={gradient.inner} />
 
         <div className="TokenView-details_wrapper">
-          <div className="TokenView-label">{`${gradient.outer} – ${gradient.inner}`}</div>
+        <div className="TokenView-label">Token ID: <span className="bold-highlight">{tokenID}</span> </div>
+          <div className="TokenView-label">Skin: {`${gradient.outer} – ${gradient.inner}`}</div>
           {isOwned && (
             <p className="text-with-icon">
               <PetIcon /> Owned by me{" "}
@@ -103,16 +79,20 @@ const TokenView = ({ token, onCloseClicked }) => {
                   onChange={handleSellFormChange}
                 />
               </label>
-              <button onClick={handleSellSubmit}>sell</button>
+              <button onClick={handleSellSubmit} class="button button--winona button--border-thin button--round-s"
+                data-text="Sell"
+              >
+                <span>Sell</span>
+              </button>
             </>
           )}
-
+          {isOnSale && (
+            <p className="text-with-icon">
+              <LoyaltyIcon /> Currently on sale
+            </p>
+          )}
           {isOwned && isOnSale && (
             <>
-              <p className="text-with-icon">
-                <LoyaltyIcon /> Currently on sale
-              </p>
-
               <button
                 onClick={handleCancel}
                 class="button button--winona button--border-thin button--round-s"
@@ -134,8 +114,13 @@ const TokenView = ({ token, onCloseClicked }) => {
                   onChange={handleBidFormChange}
                 />
               </label>
-              <button onClick={handleBidSubmit} className="text-with-icon">
-                <GavelIcon />
+              <button
+                onClick={handleBidSubmit}
+                class="button button--winona button--border-thin button--round-s "
+                data-text="Make Bid"
+              >
+               
+               <span> Make Bid</span>
               </button>
               <span>{}</span>
             </>

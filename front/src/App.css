@@ -43,10 +43,35 @@
   /* background: #cfd8dc; */
 	/* color: #37474f; */
 	font-weight: 600;
-	font-size: 1em;
+	/* font-size: 1em; */
 	font-family: 'Raleway', Arial, sans-serif;
 }
+.bold-highlight {
+	font-weight: 700;
+	color: #37474f;
+	font-size:20px;
+}
+.text-with-icon {
+	display: flex;
+	align-items: center;
+  }
+  
+  /* not used */
+  button.text-with-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+  }
+  
+  .text-with-icon > :first-child {
+	margin-right: 10px;
+  }
 
+  input {
+	width: 50px;
+    padding: 2%;
+    border-radius: 5px;
+  }
 /* Common button styles */
 .button {
 	float: left;
