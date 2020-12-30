@@ -1,7 +1,10 @@
 .TokenItem {
   cursor: pointer;
   position: relative;
-  animation: tokenItemIn .25s cubic-bezier(.06,.67,.37,.99) forwards
+  animation: tokenItemIn .25s cubic-bezier(.06,.67,.37,.99) forwards;
+  --card-width: 400px;
+  --card-height: 300px;
+  --circle-trans-Y: -70%;
 }
 
 .TokenItem:hover > .TokenItem-image_wrapper {
@@ -28,4 +31,26 @@
   display: flex;
   justify-content: space-between;
   height: 28px;
+}
+
+/* background colors of cards based on element*/
+
+.TokenItem-background_style.water {
+	background-color:#bee7ff;
+}
+
+.TokenItem-background_style.air {
+	background-color:#d7beff;
+}
+
+.TokenItem-background_style.fire {
+	background-color:#ffc8be;
+}
+
+.TokenItem-background_style.electricity {
+	background-color:#fff3be;
+}
+
+.TokenItem-background_style.earth {
+	background-color:#c6f0b5;
 }

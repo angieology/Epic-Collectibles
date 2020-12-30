@@ -17,7 +17,7 @@ const generateStat = (num = 10, multiplier = 100, min = 1) =>
  * @param {int} multiplier, base of 100, etc. NOTE adjust max and min accordingly
  */
 function getRandomInt(max, min = 0, multiplier = 1) {
-  return Math.floor(Math.random() * Math.floor(max) + min) * multiplier;
+  return Math.floor(Math.random() * Math.floor(max + 1) + min) * multiplier;
 }
 const generateColor = () =>
   "#" + Math.floor(Math.random() * 16777215).toString(16);

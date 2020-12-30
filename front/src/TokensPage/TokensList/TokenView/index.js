@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import GavelIcon from "@material-ui/icons/Gavel";
 import PetIcon from "@material-ui/icons/Pets";
 import LoyaltyIcon from "@material-ui/icons/Loyalty";
 
@@ -55,29 +54,29 @@ const TokenView = ({ token, onCloseClicked }) => {
   };
 
   return (
-    <div className={`TokenView-layout `}>
-      <button className="close" onClick={onCloseClicked} />
+    <div className={`TokenView-layout card ${element}`}>
+      <div className="circles" />
+      <div className="TokenView-above-circle">
+        <button className="close" onClick={onCloseClicked} />
+        <div className={`TokenView-content_wrapper `}>
+          <div>
+            {attributes && (
+              <TokenImage outer={attributes.outer} inner={attributes.inner} />
+            )}
 
-      <div className={`TokenView-content_wrapper ${element}`}>
-        <div>
-          {attributes && (
-            <TokenImage outer={attributes.outer} inner={attributes.inner} />
-          )}
+            <div className="TokenView-label bold-highlight">#{tokenID}</div>
+            <div className="TokenView-label">Name: {name}</div>
+            <div className="TokenView-label">Element: {element}</div>
 
-          <div className="TokenView-label bold-highlight">#{tokenID}</div>
-          <div className="TokenView-label">Name: {name}</div>
-          <div className="TokenView-label">Element: {element}</div>
-
-          {Object.entries(stats).map(([key, value]) => (
-            <div className="TokenView-label" key={key}>
-              {key}: {value}
-            </div>
-          ))}
-        </div>
-        <div className="TokenView-details_wrapper">
-          <div className="TokenView-label">
-            Abilities:
-           
+            {Object.entries(stats).map(([key, value]) => (
+              <div className="TokenView-label" key={key}>
+                {key}: {value}
+              </div>
+            ))}
+          </div>
+          <div className="TokenView-details_wrapper">
+            <div className="TokenView-label">
+              Abilities:
               {Object.entries(abilities).map(([key, value]) => (
                 <>
                   <div className="stat-layout">
@@ -92,80 +91,80 @@ const TokenView = ({ token, onCloseClicked }) => {
                   </div>
                 </>
               ))}
-           
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="TokenView-actions">
-        <div>
-          {isOwned && (
-            <p className="text-with-icon">
-              <PetIcon /> Owned by me{" "}
-            </p>
-          )}
-          {isOnSale && (
-            <p className="text-with-icon">
-              <LoyaltyIcon /> Currently on sale
-            </p>
-          )}
-        </div>
+        <div className="TokenView-actions">
+          <div>
+            {isOwned && (
+              <p className="text-with-icon">
+                <PetIcon /> Owned by me{" "}
+              </p>
+            )}
+            {isOnSale && (
+              <p className="text-with-icon">
+                <LoyaltyIcon /> Currently on sale
+              </p>
+            )}
+          </div>
 
-        <div>
-          {isOwned && !isOnSale && (
-            <>
-              <label>
-                Price:{" "}
-                <input
-                  type="text"
-                  value={askPrice}
-                  name="askPrice"
-                  onChange={handleSellFormChange}
-                />
-              </label>
-              <button
-                onClick={handleSellSubmit}
-                className="button button--winona button--border-thin button--round-s"
-                data-text="Sell"
-              >
-                <span>Sell</span>
-              </button>
-            </>
-          )}
+          <div>
+            {isOwned && !isOnSale && (
+              <>
+                <label>
+                  Price:{" "}
+                  <input
+                    type="text"
+                    value={askPrice}
+                    name="askPrice"
+                    onChange={handleSellFormChange}
+                  />
+                </label>
+                <button
+                  onClick={handleSellSubmit}
+                  className="button button--winona button--border-thin button--round-s"
+                  data-text="Sell"
+                >
+                  <span>Sell</span>
+                </button>
+              </>
+            )}
 
-          {isOwned && isOnSale && (
-            <>
-              <button
-                onClick={handleCancel}
-                className="button button--winona button--border-thin button--round-s"
-                data-text="Cancel Auction"
-              >
-                <span>Cancel Auction</span>
-              </button>
-            </>
-          )}
+            {isOwned && isOnSale && (
+              <>
+                <button
+                  onClick={handleCancel}
+                  className="button button--winona button--border-thin button--round-s"
+                  data-text="Cancel Auction"
+                >
+                  <span>Cancel Auction</span>
+                </button>
+              </>
+            )}
 
-          {!isOwned && isOnSale && (
-            <>
-              <label>
-                Bid Price:{" "}
-                <input
-                  type="text"
-                  value={bidPrice}
-                  name="bidPrice"
-                  onChange={handleBidFormChange}
-                />
-              </label>
-              <button
-                onClick={handleBidSubmit}
-                className="button button--winona button--border-thin button--round-s "
-                data-text="Make Bid"
-              >
-                <span> Make Bid</span>
-              </button>
-              <span>{}</span>
-            </>
-          )}
+            {!isOwned && isOnSale && (
+              <>
+                <label>
+                  Bid Price:{" "}
+                  <input
+                    type="text"
+                    value={bidPrice}
+                    name="bidPrice"
+                    onChange={handleBidFormChange}
+                  />
+                </label>
+                <button
+                  onClick={handleBidSubmit}
+                  className="button button--winona button--border-thin button--round-s "
+                  data-text="Make Bid"
+                >
+                  <span> Make Bid</span>
+                </button>
+                <span>{}</span>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>

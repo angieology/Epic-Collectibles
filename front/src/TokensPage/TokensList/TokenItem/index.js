@@ -29,6 +29,7 @@ const TokenItem = ({ token }) => {
       </Modal>
       <div className="TokenItem" onClick={openModal}>
         <div className={`TokenItem-background_style ${attributes && attributes.element}`} onClick={openModal}>
+
           {attributes && <TokenImage outer={attributes.outer} inner={attributes.inner} />}
 
           <div className="TokenItem-details">
