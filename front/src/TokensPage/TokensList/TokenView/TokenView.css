@@ -3,8 +3,8 @@
 }
 
 .TokenView-content_wrapper {
-  background-color: #e7dcd6;
   border-radius: 10px;
+
   margin-bottom: 20px;
   padding: 40px;
 
@@ -81,15 +81,54 @@
   height: 20px;
   /* width: 100%; */
   border-radius: 20px;
-  background: linear-gradient(to right, pink, white);
 
 }
 .stat-bar_filler {
-  background: linear-gradient(to right, rgb(214, 72, 72), rgb(238, 153, 181));
   height: 100%;
   border-radius: inherit;
   transition: width .2s ease-in;
 }
+
+/* colors */
+ .stat-bar.fire {
+  background: linear-gradient(to right, pink, white);
+
+ }
+ .fire .stat-bar_filler {
+  background: linear-gradient(to right, rgb(214, 72, 72), rgb(238, 153, 181));
+ }
+
+ .stat-bar.air {
+  background: linear-gradient(to right, rgb(215, 206, 255), white);
+
+ }
+ .air .stat-bar_filler {
+  background: linear-gradient(to right, rgb(119, 30, 235), rgb(192, 162, 248));
+ }
+
+ .stat-bar.water {
+  background: linear-gradient(to right, rgb(197, 221, 252), white);
+
+ }
+ .water .stat-bar_filler {
+  background: linear-gradient(to right, rgb(30, 153, 235), rgb(162, 199, 248));
+ }
+
+ .stat-bar.electricity {
+  background: linear-gradient(to right, rgb(255, 250, 206), white);
+
+ }
+ .electricity .stat-bar_filler {
+  background: linear-gradient(to right, rgb(252, 186, 4), rgb(255, 223, 119));
+ }
+
+ .stat-bar.earth {
+  background: linear-gradient(to right, rgb(202, 252, 189), white);
+
+ }
+ .earth .stat-bar_filler {
+  background: linear-gradient(to right, rgb(43, 180, 9), rgb(155, 221, 101));
+ }
 
 .stat-layout {
   display: flex;
@@ -101,14 +140,14 @@
 .stat-key {
   position: absolute;
   left: 0;
-
+  bottom: 5px;
 }
 
 .stat-value {
-font-size: 28px;
-font-weight: 300;
+  font-size: 28px;
+  font-weight: 300;
 
-position: absolute;
-right:25px;
-bottom: -10px;
+  position: absolute;
+  right:25px;
+  bottom: -10px;
 }

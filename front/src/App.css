@@ -25,7 +25,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #61b0fb;
 }
 
 @keyframes App-logo-spin {
@@ -35,6 +35,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* background colors of cards based on element*/
+
+.water {
+	background-color:#bee7ff;
+}
+
+.air {
+	background-color:#d7beff;
+}
+
+.fire {
+	background-color:#ffc8be;
+}
+
+.electricity {
+	background-color:#fff3be;
+}
+
+.earth {
+	background-color:#c6f0b5;
 }
 
 /* some fonts */

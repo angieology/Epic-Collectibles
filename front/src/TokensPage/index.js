@@ -43,11 +43,10 @@ const TokensPage = () => {
       height: getRandomInt(100, 1, 10),
     };
     const abilities = {
-      health: getRandomInt(100, 1, 100),
-      power: getRandomInt(100, 1, 100),
-      defense: getRandomInt(100, 1, 100),
-      attack: getRandomInt(100, 1, 100),
-      healing: getRandomInt(100, 1, 100),
+      power: getRandomInt(100, 1, 10),
+      defense: getRandomInt(100, 1, 10),
+      attack: getRandomInt(100, 1, 10),
+      healing: getRandomInt(100, 1, 10),
     };
 
     const name = generateName();

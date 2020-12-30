@@ -56,10 +56,10 @@ const TokenView = ({ token, onCloseClicked }) => {
   };
 
   return (
-    <div className="TokenView-layout">
+    <div className={`TokenView-layout `}>
       <button className="close" onClick={onCloseClicked} />
 
-      <div className="TokenView-content_wrapper">
+      <div className={`TokenView-content_wrapper ${element}`}>
         <div>
           {attributes && (
             <TokenImage outer={attributes.outer} inner={attributes.inner} />
@@ -81,22 +81,22 @@ const TokenView = ({ token, onCloseClicked }) => {
         <div className="TokenView-details_wrapper">
           <div className="TokenView-label">
             Abilities:
-            <ul>
+           
               {Object.entries(abilities).map(([key, value]) => (
-                <li>
+                <>
                   <div className="stat-layout">
                     <span className="stat-key">{key}</span>{" "}
                     <span className="stat-value">{value}</span>
                   </div>
-                  <div className="stat-bar">
+                  <div className={`stat-bar ${element}`}>
                     <div
                       className="stat-bar_filler"
-                      style={{ width: `${(value / 10000) * 100}%` }}
+                      style={{ width: `${(value / 1000) * 100}%` }}
                     ></div>
                   </div>
-                </li>
+                </>
               ))}
-            </ul>
+           
           </div>
         </div>
       </div>
