@@ -8,7 +8,7 @@ Epic characters as non-fungible tokens, can trade and create new Epics
 - (optional) VsCode extension for solidity files
 - install truffle following instructions
 
-start with command 
+start with command (note in the last two tests don't pass but I think this is fault with the test setup, bid and cancel works in browser)
 ```
 truffle test
 truffle migrate
