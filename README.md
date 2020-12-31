@@ -15,9 +15,9 @@ truffle migrate
 cd front
 yarn install
 yarn start
-``
+```
 
-Refer to this truffle pet shop tutorial for setup https://www.trufflesuite.com/tutorials/pet-shop
+Refer to this truffle [pet shop tutorial](https://www.trufflesuite.com/tutorials/pet-shop) for setup 
 
 
 Setup is the same, however when you install MetaMask, there is an update with 'Network ID' that doesn't exist in Ganache.
@@ -25,6 +25,6 @@ Go to settings in Ganache and change the network ID to 1337 to match Metamask.
 When creating a metamask account, use the seed phrase from your Ganache.
 
 
-Project is roughly based on this CryptoKitties clone, package versions are outdated, but you can refer to the explanations. 
-https://maksimivanov.com/posts/gradient-coin-tutorial/
+Project is roughly based on this [CryptoKitties clone tutorial](https://maksimivanov.com/posts/gradient-coin-tutorial/) package versions are outdated, but you can refer to the explanations. 
+
 
