@@ -25,6 +25,6 @@ Go to settings in Ganache and change the network ID to 1337 to match Metamask.
 When creating a metamask account, use the seed phrase from your Ganache.
 
 
-Project is roughly based on this [CryptoKitties clone tutorial](https://maksimivanov.com/posts/gradient-coin-tutorial/) package versions are outdated, but you can refer to the explanations. 
+Project is roughly based on this [CryptoKitties clone tutorial](https://maksimivanov.com/posts/gradient-coin-tutorial/) package versions are outdated, but you can refer to the general explanations. I've used it as a base and added some additional features and tweaked it for my own creation.
 
 
